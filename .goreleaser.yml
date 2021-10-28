@@ -5,7 +5,7 @@ project_name: s5cmd
 # https://goreleaser.com/customization/hooks/
 before:
   hooks:
-    - make build
+    - go mod tidy -v
 
 # https://goreleaser.com/customization/build/
 builds:
