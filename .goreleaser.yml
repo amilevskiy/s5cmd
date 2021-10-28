@@ -1,43 +1,71 @@
+---
+# https://goreleaser.com/customization/project/
+project_name: s5cmd
+
+# https://goreleaser.com/customization/hooks/
 before:
   hooks:
     - make build
+
+# https://goreleaser.com/customization/build/
 builds:
-  -
-    binary: s5cmd
-    ldflags: -s -w -X github.com/peak/s5cmd/version.Version={{.Tag}} -X github.com/peak/s5cmd/version.GitCommit={{ .ShortCommit }}
+  - binary: "{{ .ProjectName }}"
     env:
       - CGO_ENABLED=0
+    # https://goreleaser.com/customization/templates/
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    flags:
+      - -trimpath
+    ldflags:
+      - "-s -w -X github.com/amilevskiy/{{ .ProjectName }}/version.Version={{.Tag}} -X github.com/amilevskiy/{{ .ProjectName }}/version.GitCommit={{ .ShortCommit }}"
     goos:
       - darwin
+      - freebsd
       - linux
       - windows
     goarch:
-      - 386
       - amd64
-      - arm
       - arm64
+      - "386"
     ignore:
       - goos: darwin
-        goarch: 386
+        goarch: "386"
+      - goos: linux
+        goarch: "386"
 
+# https://goreleaser.com/customization/archive/
 archives:
-  - name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-    replacements:
-      darwin: macOS
-      linux: Linux
-      windows: Windows
-      386: 32bit
-      amd64: 64bit
+  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format: tar.xz
     format_overrides:
       - goos: windows
         format: zip
+    replacements:
+      amd64: x86_64
+      386: i386
+      darwin: Darwin
+      freebsd: FreeBSD
+      linux: Linux
+      windows: Windows
 
+# https://goreleaser.com/customization/checksum/
 checksum:
-  name_template: '{{ .ProjectName }}_checksums.txt'
+  name_template: "{{ .ProjectName }}_{{ .Version }}_SHA256SUMS"
+  algorithm: sha256
 
-snapshot:
-  name_template: "{{ .Tag }}"
+# https://goreleaser.com/customization/sign/
+signs:
+  - artifacts: checksum
+    args:
+      - "--batch"
+      - "--local-user"
+      - "{{ .Env.GPG_FINGERPRINT }}"
+      - "--output"
+      - "${signature}"
+      - "--detach-sign"
+      - "${artifact}"
 
+# https://goreleaser.com/customization/changelog/
 changelog:
   sort: asc
   filters:
@@ -47,15 +75,21 @@ changelog:
       - Merge pull request
       - Merge branch
 
-brews:
-  - tap:
-      owner: peak
-      name: s5cmd
-    folder: Formula
-    homepage:  https://github.com/peak/s5cmd
-    description: Parallel S3 and local filesystem execution tool
-    test: |
-      system "#{bin}/s5cmd version"
-
+# https://goreleaser.com/customization/release/
 release:
-  draft: true
+# If set to true, will not auto-publish the release
+# draft: true
+
+# https://goreleaser.com/customization/nfpm/
+nfpms:
+  - homepage: https://github.com/amilevskiy/s5cmd
+    maintainer: <amilevskiy@provectus.com>
+    description: Parallel S3 and local filesystem execution tool
+    license: MIT License
+    bindir: /usr/bin
+    formats:
+      - deb
+      - rpm
+    replacements:
+      amd64: x86_64
+      linux: Linux
