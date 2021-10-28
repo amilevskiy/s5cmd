@@ -17,7 +17,7 @@ builds:
     flags:
       - -trimpath
     ldflags:
-      - "-s -w -X github.com/amilevskiy/{{ .ProjectName }}/version.Version={{.Tag}} -X github.com/amilevskiy/{{ .ProjectName }}/version.GitCommit={{ .ShortCommit }}"
+      - "-s -w -X github.com/amilevskiy/{{ .ProjectName }}/version.Version={{ .Version }} -X github.com/amilevskiy/{{ .ProjectName }}/version.GitCommit={{ .ShortCommit }}"
     goos:
       - darwin
       - freebsd
