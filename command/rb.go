@@ -5,10 +5,10 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/peak/s5cmd/log"
-	"github.com/peak/s5cmd/log/stat"
-	"github.com/peak/s5cmd/storage"
-	"github.com/peak/s5cmd/storage/url"
+	"github.com/amilevskiy/s5cmd/log"
+	"github.com/amilevskiy/s5cmd/log/stat"
+	"github.com/amilevskiy/s5cmd/storage"
+	"github.com/amilevskiy/s5cmd/storage/url"
 )
 
 var removeBucketHelpTemplate = `Name:

@@ -1,8 +1,8 @@
 package command
 
 import (
-	errorpkg "github.com/peak/s5cmd/error"
-	"github.com/peak/s5cmd/storage"
+	errorpkg "github.com/amilevskiy/s5cmd/error"
+	"github.com/amilevskiy/s5cmd/storage"
 )
 
 // SyncStrategy is the interface to make decision whether given source object should be synced

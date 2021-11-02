@@ -7,12 +7,12 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/urfave/cli/v2"
 
-	errorpkg "github.com/peak/s5cmd/error"
-	"github.com/peak/s5cmd/log"
-	"github.com/peak/s5cmd/log/stat"
-	"github.com/peak/s5cmd/storage"
-	"github.com/peak/s5cmd/storage/url"
-	"github.com/peak/s5cmd/strutil"
+	errorpkg "github.com/amilevskiy/s5cmd/error"
+	"github.com/amilevskiy/s5cmd/log"
+	"github.com/amilevskiy/s5cmd/log/stat"
+	"github.com/amilevskiy/s5cmd/storage"
+	"github.com/amilevskiy/s5cmd/storage/url"
+	"github.com/amilevskiy/s5cmd/strutil"
 )
 
 var listHelpTemplate = `Name:

@@ -7,8 +7,8 @@ import (
 
 	"github.com/hashicorp/go-multierror"
 
-	"github.com/peak/s5cmd/storage"
-	"github.com/peak/s5cmd/storage/url"
+	"github.com/amilevskiy/s5cmd/storage"
+	"github.com/amilevskiy/s5cmd/storage/url"
 )
 
 // Error is the type that implements error interface.

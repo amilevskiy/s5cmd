@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/peak/s5cmd/command"
+	"github.com/amilevskiy/s5cmd/command"
 )
 
 func main() {
