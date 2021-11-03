@@ -3,9 +3,9 @@ module github.com/amilevskiy/s5cmd
 go 1.13
 
 require (
-	github.com/aws/aws-sdk-go v1.41.15
+	github.com/aws/aws-sdk-go v1.41.17
 	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
-	github.com/google/go-cmp v0.4.0
+	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/iancoleman/strcase v0.0.0-20191112232945-16388991a334
@@ -21,7 +21,7 @@ require (
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
-	gotest.tools/v3 v3.0.2
+	gotest.tools/v3 v3.0.3
 )
 
 replace github.com/johannesboyne/gofakes3 => github.com/igungor/gofakes3 v0.0.9
