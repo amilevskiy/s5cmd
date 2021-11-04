@@ -3,7 +3,7 @@ module github.com/amilevskiy/s5cmd
 go 1.13
 
 require (
-	github.com/aws/aws-sdk-go v1.41.17
+	github.com/aws/aws-sdk-go v1.41.18
 	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/errwrap v1.1.0 // indirect
