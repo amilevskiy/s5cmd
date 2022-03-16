@@ -15,7 +15,7 @@ require (
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/posener/complete v1.2.3
 	github.com/stretchr/objx v0.3.0 // indirect
-	github.com/stretchr/testify v1.7.0
+	github.com/stretchr/testify v1.7.1
 	github.com/termie/go-shutil v0.0.0-20140729215957-bcacb06fecae
 	github.com/urfave/cli/v2 v2.3.0
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
