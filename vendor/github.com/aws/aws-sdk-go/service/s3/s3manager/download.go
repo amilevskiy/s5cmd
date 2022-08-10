@@ -192,6 +192,10 @@ func (d Downloader) Download(w io.WriterAt, input *s3.GetObjectInput, options ..
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
 func (d Downloader) DownloadWithContext(ctx aws.Context, w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
+	if err := validateSupportedARNType(aws.StringValue(input.Bucket)); err != nil {
+		return 0, err
+	}
+
 	impl := downloader{w: w, in: input, cfg: d, ctx: ctx}
 
 	for _, option := range options {
@@ -460,7 +464,11 @@ func (d *downloader) tryDownloadChunk(in *s3.GetObjectInput, w io.Writer) (int64
 	}
 	d.setTotalBytes(resp) // Set total if not yet set.
 
-	n, err := io.Copy(w, resp.Body)
+	var src io.Reader = resp.Body
+	if d.cfg.BufferProvider != nil {
+		src = &suppressWriterAt{suppressed: src}
+	}
+	n, err := io.Copy(w, src)
 	resp.Body.Close()
 	if err != nil {
 		return n, &errReadingBody{err: err}
